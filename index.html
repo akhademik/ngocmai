@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+		<script src="app.js" defer></script>
+		<title>Tính tiền lãi cầm đồ</title>
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>CẦM ĐỒ NGỌC MAI</h1>
+			<div class="result">
+				<p class="res">TỔNG TIỀN</p>
+				<div class="res1"></div>
+				<div class="res2"></div>
+			</div>
+			<div>
+				<form id="form">
+					<label>Ngày cầm</label>
+					<input class="date" />
+					<label>Số tiền cầm</label>
+					<input class="money" type="number" />
+					<label>Số ngày cầm</label>
+					<input class="totaldays" disabled />
+					<label>Lãi thường</label>
+					<input class="rate_normal" disabled />
+					<label>Lãi 1,500k/ngày</label>
+					<input class="rate_discount" disabled />
+					<button type="submit">Tính Giá</button>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
+
+<!-- 
+	const date1 = new Date('12/25/2022');
+const date2 = new Date();
+
+const difference = date1.getTime() - date2.getTime();
+
+const days = Math.ceil(difference / (1000 * 3600 * 24)); 
+console.log(days + ' days to Christmas');
+ -->
