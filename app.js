@@ -1,13 +1,3 @@
-// !start of date picker
-// config for date picker
-config = {
-	dateFormat: "d/m/Y",
-};
-
-// display datepicker at class .date
-flatpickr(".date", config);
-// !end of date picker
-
 // get all the needed variables
 const form = document.querySelector("#form");
 const datePawn = document.querySelector(".date");
@@ -45,8 +35,8 @@ datePawn.addEventListener("change", () => {
 // !Event on submit
 form.addEventListener("submit", e => {
 	e.preventDefault();
-	const newMoney = moneyPawn.value.replaceAll(",", "");
 	const newTotalDays = getDaysOfMonth(datePawn.value);
+	const newMoney = moneyPawn.value.replaceAll(",", "");
 	const pawnDays = daysPawn.value;
 	const normalRate1 = Math.round(((newMoney * 0.05) / newTotalDays) * pawnDays);
 	const discountRate1 = Math.round((newMoney / 1000000) * 1500 * pawnDays);
@@ -64,14 +54,14 @@ form.addEventListener("submit", e => {
 
 // reformat the date to month/day/year
 function formatDate(date) {
-	const [day, month, year] = date.split("/");
+	const [year, month, day] = date.split("-");
 	const newDate = `${month}/${day}/${year}`;
 	return newDate;
 }
 
 // get numbers of days
 function getDaysOfMonth(date) {
-	const [day, month, year] = date.split("/");
+	const [year, month, day] = date.split("-");
 	const newDate = new Date(year, month, 0).getDate();
 	return newDate;
 }
