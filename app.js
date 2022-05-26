@@ -26,9 +26,8 @@ moneyPawn.addEventListener("focusout", () => {
 
 // immediately show total pawn days back
 datePawn.addEventListener("change", () => {
-	const newDatePawn = new Date(formatDate(datePawn.value));
-	const songaycam = today.getTime() - newDatePawn.getTime();
-	const result = Math.ceil(songaycam / (1000 * 3600 * 24));
+	const newDatePawn = new Date(datePawn.value);
+	const result = Math.ceil((today - newDatePawn) / (1000 * 3600 * 24));
 	insertVal(daysPawn, result);
 });
 
@@ -51,13 +50,6 @@ form.addEventListener("submit", e => {
 	res1.textContent = `BT: ${(parseInt(newMoney) + parseInt(normalRate1)).toLocaleString()}`;
 	res2.textContent = `Quen: ${(parseInt(newMoney) + parseInt(discountRate1)).toLocaleString()}`;
 });
-
-// reformat the date to month/day/year
-function formatDate(date) {
-	const [year, month, day] = date.split("-");
-	const newDate = `${month}/${day}/${year}`;
-	return newDate;
-}
 
 // get numbers of days
 function getDaysOfMonth(date) {
