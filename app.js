@@ -21,7 +21,7 @@ moneyPawn.addEventListener("focus", () => {
 
 moneyPawn.addEventListener("focusout", () => {
 	const val = parseInt(moneyPawn.value);
-	const newVal = val.toLocaleString();
+	const newVal = val.toLocaleString("en-US");
 	moneyPawn.type = "text";
 	if (moneyPawn.value == "") return;
 	insertVal(moneyPawn, newVal);
@@ -42,20 +42,24 @@ datePawn.addEventListener("change", () => {
 form.addEventListener("submit", e => {
 	e.preventDefault();
 	const newTotalDays = getDaysOfMonth(datePawn.value);
-	const newMoney = moneyPawn.value.replaceAll(/[.,]/g, "");
+	const newMoney = moneyPawn.value.replaceAll(",", "");
 	const pawnDays = daysPawn.value;
 	const normalRate1 = Math.round(((newMoney * 0.05) / newTotalDays) * pawnDays);
 	const discountRate1 = Math.round((newMoney / 1000000) * 1500 * pawnDays);
 	if (discountRate1 == 0) return;
 	//
-	insertVal(normalRate, normalRate1.toLocaleString());
-	insertVal(discountRate, discountRate1.toLocaleString());
+	insertVal(normalRate, normalRate1.toLocaleString("en-US"));
+	insertVal(discountRate, discountRate1.toLocaleString("en-US"));
 	//
 	// const equal = (parseInt(newMoney) + parseInt(normalRate1)).toLocaleString();
 
 	res.remove();
-	res1.textContent = `BT: ${(parseInt(newMoney) + parseInt(normalRate1)).toLocaleString()}`;
-	res2.textContent = `Quen: ${(parseInt(newMoney) + parseInt(discountRate1)).toLocaleString()}`;
+	res1.textContent = `BT: ${(parseInt(newMoney) + parseInt(normalRate1)).toLocaleString(
+		"en-US"
+	)}`;
+	res2.textContent = `Quen: ${(parseInt(newMoney) + parseInt(discountRate1)).toLocaleString(
+		"en-US"
+	)}`;
 });
 
 // get numbers of days
