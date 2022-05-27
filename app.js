@@ -6,6 +6,7 @@ const daysPawn = document.querySelector(".totaldays");
 const normalRate = document.querySelector(".rate_normal");
 const discountRate = document.querySelector(".rate_discount");
 const today = new Date();
+const todayMax = getToday(today);
 const res = document.querySelector(".res");
 const res1 = document.querySelector(".res1");
 const res2 = document.querySelector(".res2");
@@ -25,6 +26,10 @@ moneyPawn.addEventListener("focusout", () => {
 });
 
 // immediately show total pawn days back
+datePawn.addEventListener("focus", () => {
+	datePawn.max = todayMax;
+});
+
 datePawn.addEventListener("change", () => {
 	const newDatePawn = new Date(datePawn.value);
 	const result = Math.ceil((today - newDatePawn) / (1000 * 3600 * 24));
@@ -53,7 +58,9 @@ form.addEventListener("submit", e => {
 
 // get numbers of days
 function getDaysOfMonth(date) {
-	const [year, month, day] = date.split("-");
+	const dateParse = new Date(date);
+	const year = dateParse.getFullYear();
+	const month = dateParse.getMonth() + 1;
 	const newDate = new Date(year, month, 0).getDate();
 	return newDate;
 }
@@ -61,4 +68,12 @@ function getDaysOfMonth(date) {
 // insert date back to the field
 function insertVal(element, value) {
 	element.value = value;
+}
+
+// set max date to today for input
+function getToday(today) {
+	const day = today.getDate() >= 10 ? today.getDate() : "0" + today.getDate();
+	const month = today.getMonth() + 1 >= 10 ? today.getMonth() + 1 : "0" + (today.getMonth() + 1);
+	const year = today.getFullYear();
+	return `${year}-${month}-${day}`;
 }
