@@ -28,7 +28,7 @@ moneyPawn.addEventListener("focusout", () => {
 });
 
 // immediately show total pawn days back
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("pageshow", () => {
 	datePawn.max = todayMax;
 });
 
