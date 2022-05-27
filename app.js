@@ -11,6 +11,8 @@ const res = document.querySelector(".res");
 const res1 = document.querySelector(".res1");
 const res2 = document.querySelector(".res2");
 
+console.log(datePawn.value);
+
 // convert input number
 moneyPawn.addEventListener("focus", () => {
 	moneyPawn.value = "";
@@ -40,7 +42,7 @@ datePawn.addEventListener("change", () => {
 form.addEventListener("submit", e => {
 	e.preventDefault();
 	const newTotalDays = getDaysOfMonth(datePawn.value);
-	const newMoney = moneyPawn.value.replaceAll(",", "");
+	const newMoney = moneyPawn.value.replaceAll(/[.,]/g, "");
 	const pawnDays = daysPawn.value;
 	const normalRate1 = Math.round(((newMoney * 0.05) / newTotalDays) * pawnDays);
 	const discountRate1 = Math.round((newMoney / 1000000) * 1500 * pawnDays);
@@ -49,7 +51,7 @@ form.addEventListener("submit", e => {
 	insertVal(normalRate, normalRate1.toLocaleString());
 	insertVal(discountRate, discountRate1.toLocaleString());
 	//
-	const equal = (parseInt(newMoney) + parseInt(normalRate1)).toLocaleString();
+	// const equal = (parseInt(newMoney) + parseInt(normalRate1)).toLocaleString();
 
 	res.remove();
 	res1.textContent = `BT: ${(parseInt(newMoney) + parseInt(normalRate1)).toLocaleString()}`;
