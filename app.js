@@ -13,18 +13,9 @@ const res2 = document.querySelector(".res2");
 
 console.log(datePawn.value);
 
-// convert input number
-moneyPawn.addEventListener("focus", () => {
-	moneyPawn.value = "";
-	moneyPawn.type = "number";
-});
-
-moneyPawn.addEventListener("focusout", () => {
-	const val = parseInt(moneyPawn.value);
-	const newVal = val.toLocaleString("en-US");
-	moneyPawn.type = "text";
-	if (moneyPawn.value == "") return;
-	insertVal(moneyPawn, newVal);
+moneyPawn.addEventListener("input", () => {
+	onlyNumber(moneyPawn);
+	AddComma(moneyPawn);
 });
 
 // immediately show total pawn days back
@@ -47,12 +38,8 @@ form.addEventListener("submit", e => {
 	const normalRate1 = Math.round(((newMoney * 0.05) / newTotalDays) * pawnDays);
 	const discountRate1 = Math.round((newMoney / 1000000) * 1500 * pawnDays);
 	if (discountRate1 == 0) return;
-	//
 	insertVal(normalRate, normalRate1.toLocaleString("en-US"));
 	insertVal(discountRate, discountRate1.toLocaleString("en-US"));
-	//
-	// const equal = (parseInt(newMoney) + parseInt(normalRate1)).toLocaleString();
-
 	res.remove();
 	res1.textContent = `BT: ${(parseInt(newMoney) + parseInt(normalRate1)).toLocaleString(
 		"en-US"
@@ -82,4 +69,14 @@ function getToday(today) {
 	const month = today.getMonth() + 1 >= 10 ? today.getMonth() + 1 : "0" + (today.getMonth() + 1);
 	const year = today.getFullYear();
 	return `${year}-${month}-${day}`;
+}
+
+// force number input only for input
+function onlyNumber(element) {
+	element.value = element.value.replace(/(?![0-9])./gim, "");
+}
+
+// convert numbers to have seperator
+function AddComma(element) {
+	element.value = element.value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
